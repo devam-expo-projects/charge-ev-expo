@@ -1,19 +1,13 @@
 import {
   Dimensions,
   FlatList,
-  Image,
-  Linking,
   Platform,
   StyleSheet,
-  Text,
   ToastAndroid,
-  TouchableOpacity,
   View,
 } from "react-native";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { MaterialIcons } from "@expo/vector-icons";
 import { MarkerSelection } from "../Context/MarkerSelection";
-import { AntDesign } from "@expo/vector-icons";
 import {
   collection,
   deleteDoc,
@@ -32,8 +26,6 @@ import PlaceItem from "./PlaceItem";
 const screenWidth = Dimensions.get("screen").width;
 
 const PlaceList = ({ placeList }) => {
-  const API_KEY = "AIzaSyBKnfAl9mGbPIPlbSoqpTOJYAdWJtOqdas";
-  const PHOTO_BASE_URL = "https://places.googleapis.com/v1/";
   const flatListRef = useRef();
   const db = getFirestore(app);
   const { user } = useUser();

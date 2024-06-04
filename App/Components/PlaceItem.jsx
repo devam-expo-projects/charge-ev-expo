@@ -11,6 +11,7 @@ import {
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import Header from "./Header";
 const screenWidth = Dimensions.get("screen").width;
 
 const PlaceItem = ({ place, toggleFav, isFav }) => {

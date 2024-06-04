@@ -23,6 +23,7 @@ import {
 import app from "../../Utiles/FirebaseConfig";
 import PlaceItem from "../../Components/PlaceItem";
 import { useFocusEffect } from "@react-navigation/native";
+import Header from "../../Components/Header";
 
 const FavoriteScreen = () => {
   const db = getFirestore(app);
@@ -84,11 +85,12 @@ const FavoriteScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
+      {/* <View>
         <Text style={styles.header}>
           My Favorite <Text style={{ color: "green" }}>Place</Text>
         </Text>
-      </View>
+      </View> */}
+      <Header text={"My Favorite"} subText={"Place"} />
       <View style={{ flex: 1, justifyContent: "center" }}>
         {favList?.length ? (
           <FlatList

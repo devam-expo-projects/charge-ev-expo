@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import React from "react";
 import { useUser } from "@clerk/clerk-expo";
+import Header from "../../Components/Header";
 
 const ProfileScreen = () => {
   const { user } = useUser();
@@ -16,6 +17,7 @@ const ProfileScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Header text={"Profile Page"} />
       <View style={{ flex: 1, marginHorizontal: 15 }}>
         <View style={styles.detailsWrapper}>
           <Text style={styles.detailsText}>
