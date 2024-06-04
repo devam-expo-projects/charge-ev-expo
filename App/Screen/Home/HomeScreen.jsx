@@ -58,7 +58,7 @@ const HomeScreen = () => {
         </View>
         <MapView
           style={styles.map}
-          customMapStyle={MapViewStyle} //Google Map
+          // customMapStyle={MapViewStyle} //Google Map
           region={{
             latitude: location?.latitude,
             longitude: location?.longitude,

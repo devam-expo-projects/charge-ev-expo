@@ -17,9 +17,9 @@ const ProfileScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ flex: 1, marginHorizontal: 15 }}>
-        <TouchableOpacity style={styles.detailsWrapper}>
+        <View style={styles.detailsWrapper}>
           <Text style={styles.detailsText}>
-            Name :
+            Name :{" "}
             {[user?.firstName?.toString(), user?.lastName?.toString()].join(
               " "
             )}
@@ -27,7 +27,7 @@ const ProfileScreen = () => {
           <Text style={styles.detailsText}>
             Email : {user?.emailAddresses?.[0]?.emailAddress}
           </Text>
-        </TouchableOpacity>
+        </View>
 
         <TouchableOpacity style={styles.buttonWrapper}>
           <Text style={styles.buttonText}>Logout</Text>
@@ -43,12 +43,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 15,
-    backgroundColor: "#d0d0c0",
+    backgroundColor: "rgba(208, 208, 192, 0.5)",
     fontFamily: "outfit-bold",
-    borderWidth: 1,
   },
   detailsWrapper: {
     marginBottom: 10,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: "#FFF",
   },
   detailsText: {
     fontSize: 15,
@@ -57,7 +60,6 @@ const styles = StyleSheet.create({
   buttonWrapper: {
     borderWidth: 1,
     padding: 10,
-    margin: 4,
     borderRadius: 10,
     borderColor: "red",
   },

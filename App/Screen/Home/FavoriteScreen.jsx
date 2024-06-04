@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#d0d0c0",
+    backgroundColor: "rgba(208, 208, 192, 0.5)",
   },
   header: {
     fontFamily: "outfit-bold",
