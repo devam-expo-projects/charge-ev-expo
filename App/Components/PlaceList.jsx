@@ -27,6 +27,7 @@ import {
 import app from "../Utiles/FirebaseConfig";
 import { useUser } from "@clerk/clerk-expo";
 import { useFocusEffect } from "@react-navigation/native";
+import PlaceItem from "./PlaceItem";
 
 const screenWidth = Dimensions.get("screen").width;
 
@@ -98,71 +99,7 @@ const PlaceList = ({ placeList }) => {
 
   const isFav = (placeId) => {
     const result = favList?.find((item) => item.place.id === placeId);
-    return result ? false : true;
-  };
-
-  const onDirectionClick = (place) => {
-    const url = Platform.select({
-      ios: "maps:" + place.location.latitude + "?q=" + place?.formattedAddress,
-      android:
-        "geo:" + place.location.latitude + "?q=" + place?.formattedAddress,
-    });
-    Linking.openURL(url);
-  };
-
-  const renderItem = ({ item, index }) => {
-    const favValue = isFav(item?.id);
-    return (
-      <View key={index} style={styles.renderItemContainer}>
-        <View style={styles.imageContainer}>
-          <TouchableOpacity
-            style={styles.heartIcon}
-            onPress={() => toggleFav(item, favValue)}
-          >
-            {favValue ? (
-              <AntDesign name="hearto" size={24} color="white" />
-            ) : (
-              <AntDesign name="heart" size={24} color="red" />
-            )}
-          </TouchableOpacity>
-
-          <Image
-            source={
-              item?.photos
-                ? {
-                    uri:
-                      PHOTO_BASE_URL +
-                      item?.photos[0]?.name +
-                      `/media?key=${API_KEY}&maxHeightPx=800&maxWidthPx=1200`,
-                  }
-                : require("../../assets/images/car-logo.png")
-            }
-            style={styles.image}
-          />
-        </View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.displayName} numberOfLines={1}>
-            {item?.displayName?.text}
-          </Text>
-          <View style={styles.detailsContainer}>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.address} numberOfLines={1}>
-                {item?.shortFormattedAddress}
-              </Text>
-              <Text style={styles.connectors}>
-                Connectors:{" "}
-                <Text style={styles.connectorCount}>
-                  {item?.evChargeOptions?.connectorCount || 0}
-                </Text>
-              </Text>
-            </View>
-            <TouchableOpacity onPress={() => onDirectionClick(item)}>
-              <MaterialIcons name="directions" size={32} color="black" />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    );
+    return !!result ? false : true;
   };
 
   useFocusEffect(
@@ -178,7 +115,17 @@ const PlaceList = ({ placeList }) => {
         ref={flatListRef}
         getItemLayout={getItemLayout}
         horizontal={true}
-        renderItem={renderItem}
+        renderItem={({ item, index }) => {
+          const isFavrite = isFav(item?.id);
+          return (
+            <PlaceItem
+              place={item}
+              key={index}
+              toggleFav={toggleFav}
+              isFav={isFavrite}
+            />
+          );
+        }}
         keyExtractor={(item, index) => index.toString()}
       />
     </View>

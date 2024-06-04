@@ -13,7 +13,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 const screenWidth = Dimensions.get("screen").width;
 
-const PlaceItem = ({ place, toggleFav }) => {
+const PlaceItem = ({ place, toggleFav, isFav }) => {
   const API_KEY = "AIzaSyBKnfAl9mGbPIPlbSoqpTOJYAdWJtOqdas";
   const PHOTO_BASE_URL = "https://places.googleapis.com/v1/";
 
@@ -31,9 +31,9 @@ const PlaceItem = ({ place, toggleFav }) => {
       <View style={styles.imageContainer}>
         <TouchableOpacity
           style={styles.heartIcon}
-          onPress={() => toggleFav(place, false)}
+          onPress={() => toggleFav(place, isFav)}
         >
-          {false ? (
+          {isFav ? (
             <AntDesign name="hearto" size={24} color="black" />
           ) : (
             <AntDesign name="heart" size={24} color="red" />

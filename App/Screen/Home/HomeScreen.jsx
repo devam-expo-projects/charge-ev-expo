@@ -8,7 +8,6 @@ import MapHeader from "../../Components/MapHeader";
 import api from "../../Utiles/api";
 import PlaceList from "../../Components/PlaceList";
 import { MarkerSelection } from "../../Context/MarkerSelection";
-import { useFocusEffect } from "@react-navigation/native";
 
 const HomeScreen = () => {
   const { location, setLocation } = useContext(UserLocation);
