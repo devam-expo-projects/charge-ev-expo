@@ -35,7 +35,8 @@
         "buildType": "apk"
       },
       "ios": {
-        "simulator": true
+        "buildType": "archive",
+        "simulator": false
       }
     }
   },

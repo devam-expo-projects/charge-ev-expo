@@ -5,6 +5,9 @@ module.exports = {
     android: {
         package: "com.project.chargeev",
     },
+    ios: {
+        bundleIdentifier: "com.project.chargeev",
+    },
     extra: {
         clerkPublishableKey: process.env.CLERK_PUBLISHABLE_KEY,
         eas: {
