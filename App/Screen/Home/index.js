@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { RouteNames } from "../../Common/constants";
-
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { AntDesign } from '@expo/vector-icons';
-import ProfileScreen from "./ProfileScreen";
 import HomeScreen from "./HomeScreen";
 import FavoriteScreen from "./FavoriteScreen";
 import * as Location from 'expo-location';
 import { UserLocation } from "../../Context/UserLocation";
 const Tab = createMaterialBottomTabNavigator();
 
-
-
 export const Home = () => {
-
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
 
     useEffect(() => {
         (async () => {
-
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
                 setErrorMsg('Permission to access location was denied');
