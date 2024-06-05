@@ -69,12 +69,6 @@ const PlaceList = ({ placeList }) => {
     flatListRef.current?.scrollToIndex({ animated: true, index });
   };
 
-  const getItemLayout = (_, index) => ({
-    length: screenWidth - screenWidth * 0.1,
-    offset: screenWidth * index,
-    index,
-  });
-
   useEffect(() => {
     selectedMarker && scrollToIndex(selectedMarker);
   }, [selectedMarker]);
@@ -99,7 +93,6 @@ const PlaceList = ({ placeList }) => {
       <FlatList
         data={placeList}
         ref={flatListRef}
-        getItemLayout={getItemLayout}
         horizontal={true}
         renderItem={({ item, index }) => {
           const isFavrite = isFav(item?.id);
