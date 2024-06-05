@@ -48,21 +48,12 @@ const PlaceList = ({ placeList }) => {
   const toggleFav = async (place, toAdd) => {
     try {
       if (toAdd) {
-        await setDoc(doc(db, "charge-ev", place?.id?.toString()), {
+        await setDoc(doc(db, "charge-ev", place?.id), {
           place: place,
           email: userEmail,
         });
-        if (Platform.OS === "android") {
-          ToastAndroid.show(
-            "Document written with ID: ",
-            place?.id?.toString()
-          );
-        }
       } else {
-        await deleteDoc(doc(db, "charge-ev", place?.id?.toString()));
-        if (Platform.OS === "android") {
-          ToastAndroid.show("Document Removed of ID: ", place?.id?.toString());
-        }
+        await deleteDoc(doc(db, "charge-ev", place?.id));
       }
 
       getFav();

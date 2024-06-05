@@ -12,42 +12,43 @@ import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { EXPO_GOOGLE_API_KEY } from "@env";
+
 const screenWidth = Dimensions.get("screen").width;
 
 const PlaceItem = ({ place, toggleFav, isFav }) => {
   const PHOTO_BASE_URL = "https://places.googleapis.com/v1/";
 
   const onDirectionClick = (place) => {
+    const { location, formattedAddress } = place;
     const url = Platform.select({
-      ios: "maps:" + place.location.latitude + "?q=" + place?.formattedAddress,
-      android:
-        "geo:" + place.location.latitude + "?q=" + place?.formattedAddress,
+      ios: `maps:${location.latitude},${location.longitude}?q=${formattedAddress}`,
+      android: `geo:${location.latitude},${location.longitude}?q=${formattedAddress}`,
     });
-    Linking.openURL(url);
+    Linking.openURL(url).catch((err) =>
+      console.error("Failed to open maps app:", err)
+    );
   };
 
+  const connectorCount = parseInt(place.evChargeOptions?.connectorCount) || 0;
+
   return (
-    <View key={place?.id} style={styles.renderItemContainer}>
+    <View style={styles.renderItemContainer}>
       <View style={styles.imageContainer}>
         <TouchableOpacity
           style={styles.heartIcon}
           onPress={() => toggleFav(place, isFav)}
         >
-          {isFav ? (
+          {!!isFav ? (
             <AntDesign name="hearto" size={24} color="black" />
           ) : (
             <AntDesign name="heart" size={24} color="red" />
           )}
         </TouchableOpacity>
-
         <Image
           source={
-            place?.photos
+            place?.photos && place.photos[0]?.name
               ? {
-                  uri:
-                    PHOTO_BASE_URL +
-                    place?.photos[0]?.name +
-                    `/media?key=${EXPO_GOOGLE_API_KEY}&maxHeightPx=800&maxWidthPx=1200`,
+                  uri: `${PHOTO_BASE_URL}${place.photos[0].name}/media?key=${EXPO_GOOGLE_API_KEY}&maxHeightPx=800&maxWidthPx=1200`,
                 }
               : require("../../assets/images/car-logo.png")
           }
@@ -56,18 +57,16 @@ const PlaceItem = ({ place, toggleFav, isFav }) => {
       </View>
       <View style={styles.infoContainer}>
         <Text style={styles.displayName} numberOfLines={1}>
-          {place?.displayName?.text}
+          {place.displayName.text}
         </Text>
         <View style={styles.detailsContainer}>
           <View style={{ flex: 1 }}>
             <Text style={styles.address} numberOfLines={1}>
-              {place?.shortFormattedAddress}
+              {place.shortFormattedAddress}
             </Text>
             <Text style={styles.connectors}>
               Connectors:{" "}
-              <Text style={styles.connectorCount}>
-                {place?.evChargeOptions?.connectorCount || 0}
-              </Text>
+              <Text style={styles.connectorCount}>{connectorCount}</Text>
             </Text>
           </View>
           <TouchableOpacity onPress={() => onDirectionClick(place)}>

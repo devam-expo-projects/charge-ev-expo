@@ -58,17 +58,8 @@ const FavoriteScreen = () => {
           place: place,
           email: userEmail,
         });
-        if (Platform.OS === "android") {
-          ToastAndroid.show(
-            "Document written with ID: ",
-            place?.id?.toString()
-          );
-        }
       } else {
         await deleteDoc(doc(db, "charge-ev", place?.id?.toString()));
-        if (Platform.OS === "android") {
-          ToastAndroid.show("Document Removed of ID: ", place?.id?.toString());
-        }
       }
       getFav();
       setLoading(false);
