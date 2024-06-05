@@ -23,7 +23,8 @@
         "backgroundColor": "#ffffff",
         "package": "com.project.chargeev",
         "versionCode": 1
-      }
+      },
+      "package": "com.project.chargeev"
     },
     "web": {
       "favicon": "./assets/favicon.png"
