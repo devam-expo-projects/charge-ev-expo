@@ -48,13 +48,6 @@ export const Home = () => {
                     )
                 }} />
 
-                <Tab.Screen name={RouteNames.PROFILE_SCREEN} component={ProfileScreen} options={{
-                    tabBarLabel: "Profile",
-                    tabBarIcon: ({ color, size }) => (
-                        <AntDesign name="user" size={24} color="black" />
-                    )
-                }} />
-
             </Tab.Navigator>
         </UserLocation.Provider>
     );

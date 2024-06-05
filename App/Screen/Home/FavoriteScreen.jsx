@@ -61,7 +61,7 @@ const FavoriteScreen = () => {
       } else {
         await deleteDoc(doc(db, "charge-ev", place?.id?.toString()));
       }
-      getFav();
+      await getFav();
       setLoading(false);
     } catch (err) {
       console.error("Error adding document: ", err);
@@ -71,7 +71,9 @@ const FavoriteScreen = () => {
 
   useFocusEffect(
     React.useCallback(() => {
+      setLoading(true);
       getFav();
+      setLoading(false);
     }, [])
   );
 
@@ -97,6 +99,7 @@ const FavoriteScreen = () => {
                 place={item?.place}
                 key={index}
                 toggleFav={toggleFav}
+                loading={loading}
               />
             )}
           ></FlatList>

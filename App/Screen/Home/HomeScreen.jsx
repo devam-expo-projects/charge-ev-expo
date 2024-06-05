@@ -78,7 +78,7 @@ const HomeScreen = () => {
             >
               <Image
                 source={require("./../../../assets/images/uber.png")}
-                style={{ width: 70, height: 100, resizeMode: "contain" }}
+                style={{ width: 40, height: 60, resizeMode: "contain" }}
               />
             </Marker>
           )}

@@ -11,6 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { ClerkProvider } from '@clerk/clerk-expo';
 import * as SecureStore from "expo-secure-store";
 import { EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY } from "@env";
+import { PaperProvider } from 'react-native-paper';
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {
@@ -51,9 +52,11 @@ export default function App() {
     <Provider store={store} >
       <ClerkProvider publishableKey={EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
         <View style={styles.container} onLayout={onLayoutRootView}>
-          <NavigationContainer>
-            <Route></Route>
-          </NavigationContainer>
+          <PaperProvider>
+            <NavigationContainer>
+              <Route></Route>
+            </NavigationContainer>
+          </PaperProvider>
         </View>
       </ClerkProvider>
     </Provider>

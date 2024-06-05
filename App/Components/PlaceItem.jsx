@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Dimensions,
   Image,
   Linking,
@@ -15,7 +16,7 @@ import { EXPO_GOOGLE_API_KEY } from "@env";
 
 const screenWidth = Dimensions.get("screen").width;
 
-const PlaceItem = ({ place, toggleFav, isFav }) => {
+const PlaceItem = ({ place, toggleFav, isFav, loading }) => {
   const PHOTO_BASE_URL = "https://places.googleapis.com/v1/";
 
   const onDirectionClick = (place) => {
@@ -38,7 +39,9 @@ const PlaceItem = ({ place, toggleFav, isFav }) => {
           style={styles.heartIcon}
           onPress={() => toggleFav(place, isFav)}
         >
-          {!!isFav ? (
+          {loading ? (
+            <ActivityIndicator />
+          ) : !!isFav ? (
             <AntDesign name="hearto" size={24} color="black" />
           ) : (
             <AntDesign name="heart" size={24} color="red" />

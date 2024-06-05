@@ -33,6 +33,7 @@ const PlaceList = ({ placeList }) => {
 
   const { selectedMarker, setSelectedMarker } = useContext(MarkerSelection);
   const [favList, setFavList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getFav = async () => {
     const querySnapshot = await getDocs(
@@ -46,6 +47,7 @@ const PlaceList = ({ placeList }) => {
   };
 
   const toggleFav = async (place, toAdd) => {
+    setLoading(true);
     try {
       if (toAdd) {
         await setDoc(doc(db, "charge-ev", place?.id), {
@@ -56,7 +58,8 @@ const PlaceList = ({ placeList }) => {
         await deleteDoc(doc(db, "charge-ev", place?.id));
       }
 
-      getFav();
+      await getFav();
+      setLoading(false);
     } catch (err) {
       console.error("Error adding document: ", err);
     }
@@ -106,9 +109,11 @@ const PlaceList = ({ placeList }) => {
               key={index}
               toggleFav={toggleFav}
               isFav={isFavrite}
+              loading={loading}
             />
           );
         }}
+        showsHorizontalScrollIndicator={false}
         keyExtractor={(item, index) => index.toString()}
       />
     </View>
