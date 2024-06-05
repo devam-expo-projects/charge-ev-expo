@@ -1,5 +1,7 @@
 import {
+  Platform,
   SafeAreaView,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -12,11 +14,9 @@ import Header from "../../Components/Header";
 const ProfileScreen = () => {
   const { user } = useUser();
 
-  const keys = Object.keys(user?.emailAddresses);
-  console.log(user?.emailAddresses?.[0]?.emailAddress);
-
   return (
     <SafeAreaView style={styles.container}>
+      {Platform.OS === "android" && <StatusBar barStyle={"default"} />}
       <Header text={"Profile Page"} />
       <View style={{ flex: 1, marginHorizontal: 15 }}>
         <View style={styles.detailsWrapper}>

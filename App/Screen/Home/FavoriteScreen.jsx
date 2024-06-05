@@ -3,6 +3,7 @@ import {
   FlatList,
   Platform,
   SafeAreaView,
+  StatusBar,
   StyleSheet,
   Text,
   ToastAndroid,
@@ -85,11 +86,7 @@ const FavoriteScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <View>
-        <Text style={styles.header}>
-          My Favorite <Text style={{ color: "green" }}>Place</Text>
-        </Text>
-      </View> */}
+      {Platform.OS === "android" && <StatusBar barStyle={"default"} />}
       <Header text={"My Favorite"} subText={"Place"} />
       <View style={{ flex: 1, justifyContent: "center" }}>
         {favList?.length ? (
@@ -102,9 +99,10 @@ const FavoriteScreen = () => {
                 color={"green"}
               ></ActivityIndicator>
             }
-            onRefresh={() => getFav()}
+            onRefresh={getFav}
             renderItem={({ item, index }) => (
               <PlaceItem
+                isFav={false}
                 place={item?.place}
                 key={index}
                 toggleFav={toggleFav}
@@ -112,7 +110,7 @@ const FavoriteScreen = () => {
             )}
           ></FlatList>
         ) : (
-          <Text style={{ fontFamily: "origin" }}>Favorite List Empty</Text>
+          <Text style={{ fontFamily: "outfit" }}>Favorite List Empty</Text>
         )}
       </View>
     </SafeAreaView>

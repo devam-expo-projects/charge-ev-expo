@@ -11,11 +11,10 @@ import {
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import Header from "./Header";
+import { EXPO_GOOGLE_API_KEY } from "@env";
 const screenWidth = Dimensions.get("screen").width;
 
 const PlaceItem = ({ place, toggleFav, isFav }) => {
-  const API_KEY = "AIzaSyBKnfAl9mGbPIPlbSoqpTOJYAdWJtOqdas";
   const PHOTO_BASE_URL = "https://places.googleapis.com/v1/";
 
   const onDirectionClick = (place) => {
@@ -48,7 +47,7 @@ const PlaceItem = ({ place, toggleFav, isFav }) => {
                   uri:
                     PHOTO_BASE_URL +
                     place?.photos[0]?.name +
-                    `/media?key=${API_KEY}&maxHeightPx=800&maxWidthPx=1200`,
+                    `/media?key=${EXPO_GOOGLE_API_KEY}&maxHeightPx=800&maxWidthPx=1200`,
                 }
               : require("../../assets/images/car-logo.png")
           }

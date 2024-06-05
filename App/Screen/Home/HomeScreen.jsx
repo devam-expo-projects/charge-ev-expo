@@ -50,7 +50,7 @@ const HomeScreen = () => {
 
   return (
     <MarkerSelection.Provider value={{ selectedMarker, setSelectedMarker }}>
-      <View>
+      <View style={{ flexGrow: 1 }}>
         <StatusBar hidden={true} />
         <View style={styles.headerContainer}>
           <MapHeader setLocation={getlocation} />
@@ -65,17 +65,19 @@ const HomeScreen = () => {
             latitudeDelta: 0.0422,
           }}
         >
-          <Marker
-            coordinate={{
-              latitude: location?.latitude,
-              longitude: location?.longitude,
-            }}
-          >
-            <Image
-              source={require("./../../../assets/images/uber.png")}
-              style={{ width: 70, height: 100, resizeMode: "contain" }}
-            ></Image>
-          </Marker>
+          {location?.latitude && location?.longitude && (
+            <Marker
+              coordinate={{
+                latitude: location?.latitude,
+                longitude: location?.longitude,
+              }}
+            >
+              <Image
+                source={require("./../../../assets/images/uber.png")}
+                style={{ width: 70, height: 100, resizeMode: "contain" }}
+              ></Image>
+            </Marker>
+          )}
 
           {placeListData &&
             placeListData?.map((item, index) => {
