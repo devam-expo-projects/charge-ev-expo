@@ -4,9 +4,12 @@
   "main": "expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "android:build": "eas build --profile local --platform android",
-    "ios": "expo start --ios",
+    "start:android": "expo start --android",
+    "start:ios": "expo start --ios",
+    "android:local-build": "eas build --profile local --platform android",
+    "android:preview-build": "eas build --profile preview --platform android",
+    "ios:local-build": "eas build --profile local --platform ios",
+    "ios:preview-build": "eas build --profile preview --platform ios",
     "web": "expo start --web"
   },
   "dependencies": {
