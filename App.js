@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { useCallback } from 'react';
 import { Provider } from 'react-redux';
 import store from './App/Store/store';
 import { AppRegistry } from 'react-native';
@@ -15,19 +15,25 @@ import { PaperProvider } from 'react-native-paper';
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {
-  const [fontsLoaded, fontError] = useFonts({
+  const [fontsLoaded] = useFonts({
     'outfit': require('./assets/fonts/Outfit-Regular.ttf'),
     'outfit-bold': require('./assets/fonts/Outfit-Bold.ttf'),
     'outfit-semibold': require('./assets/fonts/Outfit-SemiBold.ttf'),
   });
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded || fontError) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded, fontError]);
+  const [loading, setLoading] = useState(true);
 
-  if (!fontsLoaded && !fontError) {
+  useEffect(() => {
+    async function hideSplash() {
+      if (fontsLoaded) {
+        await SplashScreen.hideAsync();
+        setLoading(false);
+      }
+    }
+    hideSplash();
+  }, [fontsLoaded]);
+
+  if (loading) {
     return null;
   }
 
@@ -49,12 +55,12 @@ export default function App() {
   };
 
   return (
-    <Provider store={store} >
+    <Provider store={store}>
       <ClerkProvider publishableKey={EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
-        <View style={styles.container} onLayout={onLayoutRootView}>
+        <View style={styles.container}>
           <PaperProvider>
             <NavigationContainer>
-              <Route></Route>
+              <Route />
             </NavigationContainer>
           </PaperProvider>
         </View>
