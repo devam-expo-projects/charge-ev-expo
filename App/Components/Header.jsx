@@ -13,7 +13,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   header: {
-    fontFamily: "outfit-bold",
+    // fontFamily: "outfit-bold",
     fontSize: 25,
     marginVertical: 10,
     textAlign: "center",

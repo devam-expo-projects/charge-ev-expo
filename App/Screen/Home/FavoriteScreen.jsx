@@ -104,7 +104,7 @@ const FavoriteScreen = () => {
             )}
           ></FlatList>
         ) : (
-          <Text style={{ fontFamily: "outfit" }}>Favorite List Empty</Text>
+          <Text style={styles.emptyMessage}>Favorite List Empty</Text>
         )}
       </View>
     </SafeAreaView>
@@ -120,8 +120,11 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(208, 208, 192, 0.5)",
   },
   header: {
-    fontFamily: "outfit-bold",
+    // fontFamily: "outfit-bold",
     fontSize: 25,
     marginVertical: 10,
+  },
+  emptyMessage: {
+    // fontFamily: "outfit"
   },
 });
