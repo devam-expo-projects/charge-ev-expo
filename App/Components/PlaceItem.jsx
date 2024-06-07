@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   displayName: {
-    // fontFamily: "outfit-bold",
+    fontFamily: "outfit-bold",
     fontSize: 20,
   },
   detailsContainer: {
@@ -123,14 +123,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   address: {
-    // fontFamily: "outfit",
+    fontFamily: "outfit",
     fontSize: 15,
   },
   connectors: {
-    // fontFamily: "outfit",
+    fontFamily: "outfit",
     fontSize: 15,
   },
   connectorCount: {
-    // fontFamily: "outfit-semibold",
+    fontFamily: "outfit-semibold",
   },
 });

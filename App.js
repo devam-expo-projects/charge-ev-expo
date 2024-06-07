@@ -13,29 +13,29 @@ import * as SecureStore from "expo-secure-store";
 import { EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY } from "@env";
 import { PaperProvider } from 'react-native-paper';
 
-// SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync();
 export default function App() {
-  // const [fontsLoaded] = useFonts({
-  //   'outfit': require('./assets/fonts/Outfit-Regular.ttf'),
-  //   'outfit-bold': require('./assets/fonts/Outfit-Bold.ttf'),
-  //   'outfit-semibold': require('./assets/fonts/Outfit-SemiBold.ttf'),
-  // });
+  const [fontsLoaded] = useFonts({
+    'outfit': require('./assets/fonts/Outfit-Regular.ttf'),
+    'outfit-bold': require('./assets/fonts/Outfit-Bold.ttf'),
+    'outfit-semibold': require('./assets/fonts/Outfit-SemiBold.ttf'),
+  });
 
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   async function hideSplash() {
-  //     if (fontsLoaded) {
-  //       await SplashScreen.hideAsync();
-  //       setLoading(false);
-  //     }
-  //   }
-  //   hideSplash();
-  // }, [fontsLoaded]);
+  useEffect(() => {
+    async function hideSplash() {
+      if (fontsLoaded) {
+        await SplashScreen.hideAsync();
+        setLoading(false);
+      }
+    }
+    hideSplash();
+  }, [fontsLoaded]);
 
-  // if (loading) {
-  //   return null;
-  // }
+  if (loading) {
+    return null;
+  }
 
   const tokenCache = {
     async getToken(key) {
