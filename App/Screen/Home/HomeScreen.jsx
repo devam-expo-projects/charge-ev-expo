@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useMemo } from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Alert, Image, StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { StatusBar } from "expo-status-bar";
 import MapViewStyle from "../../Utiles/MapViewStyle.json";
@@ -8,11 +8,46 @@ import MapHeader from "../../Components/MapHeader";
 import api from "../../Utiles/api";
 import PlaceList from "../../Components/PlaceList";
 import { MarkerSelection } from "../../Context/MarkerSelection";
+import * as Location from "expo-location";
 
 const HomeScreen = () => {
-  const { location, setLocation } = useContext(UserLocation);
   const [placeListData, setPlaceList] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
+
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          setErrorMsg("Permission to access location was denied");
+          return;
+        }
+
+        let servicesEnabled = await Location.hasServicesEnabledAsync();
+        if (!servicesEnabled) {
+          setErrorMsg("Location services are disabled");
+          return;
+        }
+
+        let resLocation = await Location.getCurrentPositionAsync({});
+        setLocation(resLocation?.coords);
+      } catch (error) {
+        setErrorMsg(
+          "Failed to get location. Please ensure location services are enabled."
+        );
+        console.error(error);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (errorMsg) {
+      Alert.alert("Error", errorMsg);
+    }
+  }, [errorMsg]);
 
   const getlocation = (search) => {
     setLocation({
@@ -66,42 +101,44 @@ const HomeScreen = () => {
 
   return (
     <MarkerSelection.Provider value={{ selectedMarker, setSelectedMarker }}>
-      <View style={{ flex: 1 }}>
-        <StatusBar hidden={true} />
-        <View style={styles.headerContainer}>
-          <MapHeader setLocation={getlocation} />
-        </View>
-        <MapView style={styles.map} region={mapRegion}>
-          {location && (
-            <Marker
-              coordinate={{
-                latitude: location?.latitude,
-                longitude: location?.longitude,
-              }}
-            >
-              <Image
-                source={require("./../../../assets/images/uber.png")}
-                style={{ width: 40, height: 60, resizeMode: "contain" }}
-              />
-            </Marker>
-          )}
+      <UserLocation.Provider value={{ location, setLocation }}>
+        <View style={{ flex: 1 }}>
+          <StatusBar hidden={true} />
+          <View style={styles.headerContainer}>
+            <MapHeader setLocation={getlocation} />
+          </View>
+          <MapView style={styles.map} region={mapRegion}>
+            {location && (
+              <Marker
+                coordinate={{
+                  latitude: location?.latitude,
+                  longitude: location?.longitude,
+                }}
+              >
+                <Image
+                  source={require("./../../../assets/images/uber.png")}
+                  style={{ width: 40, height: 60, resizeMode: "contain" }}
+                />
+              </Marker>
+            )}
 
-          {placeListData?.map((item, index) => (
-            <Marker
-              coordinate={{
-                latitude: item?.location?.latitude,
-                longitude: item?.location?.longitude,
-              }}
-              onPress={() => setSelectedMarker(index)}
-              index={index}
-              key={index}
-            />
-          ))}
-        </MapView>
-        <View style={styles.placeList}>
-          <PlaceList placeList={placeListData} />
+            {placeListData?.map((item, index) => (
+              <Marker
+                coordinate={{
+                  latitude: item?.location?.latitude,
+                  longitude: item?.location?.longitude,
+                }}
+                onPress={() => setSelectedMarker(index)}
+                index={index}
+                key={index}
+              />
+            ))}
+          </MapView>
+          <View style={styles.placeList}>
+            <PlaceList placeList={placeListData} />
+          </View>
         </View>
-      </View>
+      </UserLocation.Provider>
     </MarkerSelection.Provider>
   );
 };
