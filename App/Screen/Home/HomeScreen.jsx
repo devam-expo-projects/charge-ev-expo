@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Alert, Image, StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { StatusBar } from "expo-status-bar";
-import MapViewStyle from "../../Utiles/MapViewStyle.json";
 import { UserLocation } from "../../Context/UserLocation";
 import MapHeader from "../../Components/MapHeader";
 import api from "../../Utiles/api";
@@ -57,36 +56,36 @@ const HomeScreen = () => {
     setSelectedMarker(0);
   };
 
-  // const getPlaceHandler = async () => {
-  //   if (!location) return;
+  const getPlaceHandler = async () => {
+    if (!location) return;
 
-  //   const data = {
-  //     includedTypes: ["electric_vehicle_charging_station"],
-  //     maxResultCount: 10,
-  //     locationRestriction: {
-  //       circle: {
-  //         center: {
-  //           latitude: location.latitude,
-  //           longitude: location.longitude,
-  //         },
-  //         radius: 5000.0,
-  //       },
-  //     },
-  //   };
-  //   try {
-  //     const res = await api.NewNearbyPlace(data);
-  //     setPlaceList(res?.data?.places || []);
-  //   } catch (error) {
-  //     console.error("Error fetching nearby places:", error);
-  //   }
-  // };
+    const data = {
+      includedTypes: ["electric_vehicle_charging_station"],
+      maxResultCount: 10,
+      locationRestriction: {
+        circle: {
+          center: {
+            latitude: location.latitude,
+            longitude: location.longitude,
+          },
+          radius: 5000.0,
+        },
+      },
+    };
+    try {
+      const res = await api.NewNearbyPlace(data);
+      setPlaceList(res?.data?.places || []);
+    } catch (error) {
+      console.error("Error fetching nearby places:", error);
+    }
+  };
 
-  // useEffect(() => {
-  //   if (location) {
-  //     getPlaceHandler();
-  //     getlocation({ lat: location?.latitude, lng: location?.longitude });  //TODO
-  //   }
-  // }, [location?.latitude, location?.longitude]);
+  useEffect(() => {
+    if (location) {
+      getPlaceHandler();
+      getlocation({ lat: location?.latitude, lng: location?.longitude });
+    }
+  }, [location?.latitude, location?.longitude]);
 
   const mapRegion = useMemo(
     () => ({
@@ -115,7 +114,7 @@ const HomeScreen = () => {
                 }}
               >
                 <Image
-                  source={require("./../../../assets/images/uber.png")}
+                  source={require("../../../assets/images/uber.png")}
                   style={{ width: 40, height: 60, resizeMode: "contain" }}
                 />
               </Marker>

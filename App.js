@@ -4,13 +4,19 @@ import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
 import { ClerkProvider } from '@clerk/clerk-expo';
 import * as SecureStore from "expo-secure-store";
-import { EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY } from "@env";
+import { EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY, DSN } from "@env";
 import { PaperProvider } from 'react-native-paper';
 import Route from './App/Screen/Route';
 import store from './App/Store/store';
 import { name as appName } from './app.json';
+import * as Sentry from "@sentry/react-native";
 
-export default function App() {
+Sentry.init({
+  dsn: DSN,
+  tracesSampleRate: 1.0,
+});
+
+function App() {
   const tokenCache = {
     async getToken(key) {
       try {
@@ -40,6 +46,8 @@ export default function App() {
     </Provider>
   );
 }
+
+export default Sentry.wrap(App);
 
 AppRegistry.registerComponent(appName, () => App);
 

@@ -13,7 +13,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.project.chargeev"
+      "bundleIdentifier": "com.project.chargeev",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Allow $(PRODUCT_NAME) to use your location."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -21,7 +24,12 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.project.chargeev",
-      "versionCode": 1
+      "versionCode": 1,
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,7 +38,16 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+          "locationAlwaysAndWhenInUsePermission": "Allow charge-ev to use your location.",
+          "locationAlwaysPermission": "Allow charge-ev to use your location in the background.",
+          "locationWhenInUsePermission": "Allow charge-ev to use your location while the app is in use."
+        }
+      ],
+      [
+        "@sentry/react-native/expo",
+        {
+          "organization": "devam",
+          "project": "charge-ev"
         }
       ]
     ]
