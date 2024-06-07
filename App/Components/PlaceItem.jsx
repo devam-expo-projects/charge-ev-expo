@@ -52,19 +52,18 @@ const PlaceItem = ({ place, toggleFav, isFav, loading }) => {
             <AntDesign name="heart" size={24} color="red" />
           )}
         </TouchableOpacity>
-        {!!assets?.[0] ||
-          (place?.photos && (
-            <Image
-              source={
-                place?.photos && place.photos[0]?.name
-                  ? {
-                      uri: `${PHOTO_BASE_URL}${place.photos[0].name}/media?key=${EXPO_GOOGLE_API_KEY}&maxHeightPx=800&maxWidthPx=1200`,
-                    }
-                  : assets?.[0]
-              }
-              style={styles.image}
-            />
-          ))}
+        {(!!assets?.[0] || place?.photos) && (
+          <Image
+            source={
+              place?.photos && place.photos[0]?.name
+                ? {
+                    uri: `${PHOTO_BASE_URL}${place.photos[0].name}/media?key=${EXPO_GOOGLE_API_KEY}&maxHeightPx=800&maxWidthPx=1200`,
+                  }
+                : assets?.[0]
+            }
+            style={styles.image}
+          />
+        )}
       </View>
       <View style={styles.infoContainer}>
         <Text style={styles.displayName} numberOfLines={1}>
