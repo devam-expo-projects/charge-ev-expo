@@ -13,11 +13,16 @@ import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { EXPO_GOOGLE_API_KEY } from "@env";
+import { useAssets } from "expo-asset";
 
 const screenWidth = Dimensions.get("screen").width;
 
 const PlaceItem = ({ place, toggleFav, isFav, loading }) => {
   const PHOTO_BASE_URL = "https://places.googleapis.com/v1/";
+
+  const [assets, error] = useAssets([
+    require("../../assets/images/car-logo.png"),
+  ]);
 
   const onDirectionClick = (place) => {
     const { location, formattedAddress } = place;
@@ -47,16 +52,19 @@ const PlaceItem = ({ place, toggleFav, isFav, loading }) => {
             <AntDesign name="heart" size={24} color="red" />
           )}
         </TouchableOpacity>
-        <Image
-          source={
-            place?.photos && place.photos[0]?.name
-              ? {
-                  uri: `${PHOTO_BASE_URL}${place.photos[0].name}/media?key=${EXPO_GOOGLE_API_KEY}&maxHeightPx=800&maxWidthPx=1200`,
-                }
-              : require("../../assets/images/car-logo.png")
-          }
-          style={styles.image}
-        />
+        {!!assets?.[0] ||
+          (place?.photos && (
+            <Image
+              source={
+                place?.photos && place.photos[0]?.name
+                  ? {
+                      uri: `${PHOTO_BASE_URL}${place.photos[0].name}/media?key=${EXPO_GOOGLE_API_KEY}&maxHeightPx=800&maxWidthPx=1200`,
+                    }
+                  : assets?.[0]
+              }
+              style={styles.image}
+            />
+          ))}
       </View>
       <View style={styles.infoContainer}>
         <Text style={styles.displayName} numberOfLines={1}>

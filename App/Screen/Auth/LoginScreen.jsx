@@ -10,6 +10,7 @@ import GoogleSign from "../../Components/googleSign";
 import * as WebBrowser from "expo-web-browser";
 import { useOAuth, useSignIn } from "@clerk/clerk-expo";
 import { useWarmUpBrowser } from "../../hooks/useWarmUpBrowser";
+import { useAssets } from "expo-asset";
 
 const { width, height } = Dimensions.get("window");
 WebBrowser.maybeCompleteAuthSession();
@@ -18,6 +19,11 @@ const LoginScreen = () => {
   useWarmUpBrowser();
   const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
   const { isLoaded, setActive } = useSignIn();
+
+  const [assets, error] = useAssets([
+    require("./../../../assets/images/car-logo.png"),
+    require("./../../../assets/images/google.png"),
+  ]);
 
   const handleGoogleSignIn = async () => {
     if (!isLoaded) return;
@@ -35,11 +41,13 @@ const LoginScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image
-          source={require("../../../assets/images/car-logo.png")} // Ensure the path is correct
-          style={styles.carImage}
-          resizeMode="contain"
-        />
+        {!!assets?.[0] && (
+          <Image
+            source={assets[0]}
+            style={styles.carImage}
+            resizeMode="contain"
+          />
+        )}
       </View>
       <GoogleSign title="Login With Google" onClick={handleGoogleSignIn} />
     </SafeAreaView>

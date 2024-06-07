@@ -8,12 +8,17 @@ import api from "../../Utiles/api";
 import PlaceList from "../../Components/PlaceList";
 import { MarkerSelection } from "../../Context/MarkerSelection";
 import * as Location from "expo-location";
+import { useAssets } from "expo-asset";
 
 const HomeScreen = () => {
   const [placeListData, setPlaceList] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+
+  const [assets, error] = useAssets([
+    require("../../../assets/images/uber.png"),
+  ]);
 
   useEffect(() => {
     (async () => {
@@ -48,7 +53,6 @@ const HomeScreen = () => {
   }, [errorMsg]);
 
   const getlocation = (search) => {
-    console.log("get Location called");
     setLocation({
       latitude: search?.lat || 0,
       longitude: search?.lng || 0,
@@ -113,10 +117,12 @@ const HomeScreen = () => {
                   longitude: location?.longitude,
                 }}
               >
-                <Image
-                  source={require("../../../assets/images/uber.png")}
-                  style={{ width: 40, height: 60, resizeMode: "contain" }}
-                />
+                {!!assets?.[0] && (
+                  <Image
+                    source={assets[0]}
+                    style={{ width: 60, height: 60, resizeMode: "contain" }}
+                  />
+                )}
               </Marker>
             )}
 

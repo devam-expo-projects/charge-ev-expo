@@ -15,7 +15,7 @@ export const Home = () => {
                 options={{
                     tabBarLabel: "Home",
                     tabBarIcon: ({ color, size }) => (
-                        <AntDesign name="home" size={24} color={color} />
+                        <AntDesign name="home" size={24} color={'black'} />
                     ),
                 }}
             />
@@ -26,7 +26,7 @@ export const Home = () => {
                 options={{
                     tabBarLabel: "Favorite",
                     tabBarIcon: ({ color, size }) => (
-                        <AntDesign name="hearto" size={24} color={color} />
+                        <AntDesign name="hearto" size={24} color={'black'} />
                     ),
                 }}
             />

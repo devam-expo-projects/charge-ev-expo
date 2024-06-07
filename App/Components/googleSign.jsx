@@ -1,16 +1,23 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { FontWeight } from "../Common/styles";
+import { useAssets } from "expo-asset";
 
 const GoogleSign = ({ title = "Sign in with Google", onClick }) => {
+  const [assets, error] = useAssets([
+    require("../../assets/images/google.png"),
+  ]);
+
   return (
     <>
       <TouchableOpacity style={styles.googleButton} onPress={onClick}>
-        <Image
-          source={require("../../assets/images/google.png")}
-          style={styles.googleImage}
-          resizeMode="contain"
-        />
+        {!!assets?.[0] && (
+          <Image
+            source={assets[0]}
+            style={styles.googleImage}
+            resizeMode="contain"
+          />
+        )}
         <Text style={[styles.buttonText, { color: "#111" }]}>{title}</Text>
       </TouchableOpacity>
     </>
