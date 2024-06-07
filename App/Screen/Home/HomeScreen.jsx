@@ -13,7 +13,6 @@ import * as Location from "expo-location";
 const HomeScreen = () => {
   const [placeListData, setPlaceList] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
-
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
@@ -50,44 +49,44 @@ const HomeScreen = () => {
   }, [errorMsg]);
 
   const getlocation = (search) => {
+    console.log("get Location called");
     setLocation({
-      latitude: search?.lat,
-      longitude: search?.lng,
+      latitude: search?.lat || 0,
+      longitude: search?.lng || 0,
     });
     setSelectedMarker(0);
   };
 
-  const getPlaceHandler = async () => {
-    if (!location) return;
+  // const getPlaceHandler = async () => {
+  //   if (!location) return;
 
-    const data = {
-      includedTypes: ["electric_vehicle_charging_station"],
-      maxResultCount: 10,
-      locationRestriction: {
-        circle: {
-          center: {
-            latitude: location.latitude,
-            longitude: location.longitude,
-          },
-          radius: 5000.0,
-        },
-      },
-    };
+  //   const data = {
+  //     includedTypes: ["electric_vehicle_charging_station"],
+  //     maxResultCount: 10,
+  //     locationRestriction: {
+  //       circle: {
+  //         center: {
+  //           latitude: location.latitude,
+  //           longitude: location.longitude,
+  //         },
+  //         radius: 5000.0,
+  //       },
+  //     },
+  //   };
+  //   try {
+  //     const res = await api.NewNearbyPlace(data);
+  //     setPlaceList(res?.data?.places || []);
+  //   } catch (error) {
+  //     console.error("Error fetching nearby places:", error);
+  //   }
+  // };
 
-    try {
-      const res = await api.NewNearbyPlace(data);
-      setPlaceList(res?.data?.places || []);
-    } catch (error) {
-      console.error("Error fetching nearby places:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (location) {
-      getPlaceHandler();
-      // getlocation({ lat: location?.latitude, lng: location?.longitude });  //TODO
-    }
-  }, [location?.latitude, location?.longitude]);
+  // useEffect(() => {
+  //   if (location) {
+  //     getPlaceHandler();
+  //     getlocation({ lat: location?.latitude, lng: location?.longitude });  //TODO
+  //   }
+  // }, [location?.latitude, location?.longitude]);
 
   const mapRegion = useMemo(
     () => ({
