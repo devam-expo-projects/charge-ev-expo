@@ -9,11 +9,9 @@ import { EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY } from "@env";
 import { PaperProvider } from 'react-native-paper';
 import Route from './App/Screen/Route';
 import store from './App/Store/store';
-import * as SplashScreen from 'expo-splash-screen';
 import { name as appName } from './app.json';
 
 export default function App() {
-
   const tokenCache = {
     async getToken(key) {
       try {
@@ -51,6 +49,5 @@ AppRegistry.registerComponent(appName, () => App);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "black"
   },
 });
