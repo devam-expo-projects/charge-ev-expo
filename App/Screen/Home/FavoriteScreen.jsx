@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(208, 208, 192, 0.5)",
   },
   header: {
-    fontFamily: "outfit-bold",
+    // fontFamily: "outfit-bold",
     fontSize: 25,
     marginVertical: 10,
   },
