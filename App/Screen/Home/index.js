@@ -20,7 +20,7 @@ export const Home = () => {
                 }}
             />
 
-            {/* <Tab.Screen
+            <Tab.Screen
                 name={RouteNames.FAVORITE_SCREEN}
                 component={FavoriteScreen}
                 options={{
@@ -29,7 +29,7 @@ export const Home = () => {
                         <AntDesign name="hearto" size={24} color={color} />
                     ),
                 }}
-            /> */}
+            />
         </Tab.Navigator>
     );
 };
