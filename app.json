@@ -6,11 +6,10 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "jsEngine": "jsc",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "ios": {
@@ -20,7 +19,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#FFFFFF"
       },
       "package": "com.project.chargeev",
       "versionCode": 1
@@ -32,17 +31,7 @@
       [
         "expo-font",
         {
-          "fonts": [
-            "./assets/fonts/Outfit-Black.ttf",
-            "./assets/fonts/Outfit-Bold.ttf",
-            "./assets/fonts/Outfit-ExtraBold.ttf",
-            "./assets/fonts/Outfit-ExtraLight.ttf",
-            "./assets/fonts/Outfit-Light.ttf",
-            "./assets/fonts/Outfit-Medium.ttf",
-            "./assets/fonts/Outfit-Regular.ttf",
-            "./assets/fonts/Outfit-SemiBold.ttf",
-            "./assets/fonts/Outfit-Thin.ttf"
-          ]
+          "fonts": []
         }
       ],
       [
