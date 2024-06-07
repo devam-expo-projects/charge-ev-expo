@@ -7,6 +7,7 @@ import HomeScreen from "./HomeScreen";
 import FavoriteScreen from "./FavoriteScreen";
 import * as Location from 'expo-location';
 import { UserLocation } from "../../Context/UserLocation";
+
 const Tab = createMaterialBottomTabNavigator();
 
 export const Home = () => {
@@ -22,10 +23,16 @@ export const Home = () => {
                     return;
                 }
 
+                let servicesEnabled = await Location.hasServicesEnabledAsync();
+                if (!servicesEnabled) {
+                    setErrorMsg('Location services are disabled');
+                    return;
+                }
+
                 let resLocation = await Location.getCurrentPositionAsync({});
                 setLocation(resLocation?.coords);
             } catch (error) {
-                setErrorMsg('Error while fetching location');
+                setErrorMsg('Failed to get location. Please ensure location services are enabled.');
                 console.error(error);
             }
         })();
