@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useMemo } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { StatusBar } from "expo-status-bar";
@@ -48,10 +48,21 @@ const HomeScreen = () => {
   };
 
   useEffect(() => {
-    getPlaceHandler();
-    location &&
-      getlocation({ lat: location?.latitude, lng: location?.longitude });
+    if (location) {
+      getPlaceHandler();
+      // getlocation({ lat: location?.latitude, lng: location?.longitude });  //TODO
+    }
   }, [location?.latitude, location?.longitude]);
+
+  const mapRegion = useMemo(
+    () => ({
+      latitude: location?.latitude || 0,
+      longitude: location?.longitude || 0,
+      longitudeDelta: 0.0422,
+      latitudeDelta: 0.0422,
+    }),
+    [location?.latitude, location?.longitude]
+  );
 
   return (
     <MarkerSelection.Provider value={{ selectedMarker, setSelectedMarker }}>
@@ -60,15 +71,7 @@ const HomeScreen = () => {
         <View style={styles.headerContainer}>
           <MapHeader setLocation={getlocation} />
         </View>
-        <MapView
-          style={styles.map}
-          region={{
-            latitude: location?.latitude,
-            longitude: location?.longitude,
-            longitudeDelta: 0.0422,
-            latitudeDelta: 0.0422,
-          }}
-        >
+        <MapView style={styles.map} region={mapRegion}>
           {location && (
             <Marker
               coordinate={{

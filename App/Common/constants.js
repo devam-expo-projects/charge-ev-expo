@@ -5,7 +5,7 @@ export const RouteNames = Object.freeze({
 
     //Screen Route
     SIGN_SCREEN: "[AUTHENTICATION]SignupScreen",
-    HOME_SCRENN: "[HOME]HomeScreen",
+    HOME_SCREEN: "[HOME]HomeScreen",
     PROFILE_SCREEN: "[HOME]ProfileScreen",
     FAVORITE_SCREEN: "[HOME]FavoriteScreen",
 

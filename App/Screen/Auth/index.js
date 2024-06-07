@@ -16,7 +16,6 @@ export const Authentication = () => {
                 name={RouteNames.SIGN_SCREEN}
                 component={LoginScreen}
             />
-
         </AuthenticationStack.Navigator>
     );
 };

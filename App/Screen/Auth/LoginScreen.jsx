@@ -17,14 +17,13 @@ WebBrowser.maybeCompleteAuthSession();
 const LoginScreen = () => {
   useWarmUpBrowser();
   const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
-  const { isLoaded, signIn, setActive } = useSignIn();
+  const { isLoaded, setActive } = useSignIn();
 
   const handleGoogleSignIn = async () => {
     if (!isLoaded) return;
 
     try {
-      const { createdSessionId, signIn, signUp, setActive } =
-        await startOAuthFlow();
+      const { createdSessionId } = await startOAuthFlow();
       if (createdSessionId) {
         setActive({ session: createdSessionId });
       }
@@ -37,7 +36,7 @@ const LoginScreen = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.imageContainer}>
         <Image
-          source={require("../../../assets/images/car-logo.png")}
+          source={require("../../../assets/images/car-logo.png")} // Ensure the path is correct
           style={styles.carImage}
           resizeMode="contain"
         />

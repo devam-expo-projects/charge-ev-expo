@@ -10,8 +10,6 @@ import { NavigationContainer } from "@react-navigation/native";
 const AppStack = createNativeStackNavigator();
 
 const Route = () => {
-    let initialRoute = RouteNames.AUTHENTICATION;
-
     return (
         <NavigationContainer>
             <SignedIn>
@@ -20,7 +18,7 @@ const Route = () => {
                 </AppStack.Navigator>
             </SignedIn>
             <SignedOut>
-                <AppStack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
+                <AppStack.Navigator screenOptions={{ headerShown: false }}>
                     <AppStack.Screen name={RouteNames.AUTHENTICATION} component={Authentication} />
                 </AppStack.Navigator>
             </SignedOut>
