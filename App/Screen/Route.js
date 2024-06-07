@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SignedIn, SignedOut } from "@clerk/clerk-expo";
 import Authentication from "./Auth";
 import Home from "./Home";
+import { NavigationContainer } from "@react-navigation/native";
 
 const AppStack = createNativeStackNavigator();
 
@@ -12,7 +13,7 @@ const Route = () => {
     let initialRoute = RouteNames.AUTHENTICATION;
 
     return (
-        <>
+        <NavigationContainer>
             <SignedIn>
                 <AppStack.Navigator screenOptions={{ headerShown: false }}>
                     <AppStack.Screen name={RouteNames.HOME} component={Home} />
@@ -23,7 +24,7 @@ const Route = () => {
                     <AppStack.Screen name={RouteNames.AUTHENTICATION} component={Authentication} />
                 </AppStack.Navigator>
             </SignedOut>
-        </>
+        </NavigationContainer>
     );
 };
 

@@ -13,6 +13,5 @@ module.exports = {
         eas: {
             projectId: "36b13449-c9c6-417e-b560-c3295b38c2e2",
         },
-        plugins: ['expo-font'],
     },
 };

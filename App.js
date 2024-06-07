@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
-import { NavigationContainer } from '@react-navigation/native';
 import { ClerkProvider } from '@clerk/clerk-expo';
 import * as SecureStore from "expo-secure-store";
 import { EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY } from "@env";
@@ -32,13 +31,11 @@ export default function App() {
   return (
     <Provider store={store}>
       <ClerkProvider publishableKey={EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
-        <View style={styles.container}>
-          <PaperProvider>
-            <NavigationContainer>
-              <Route />
-            </NavigationContainer>
-          </PaperProvider>
-        </View>
+        <PaperProvider>
+          <View style={styles.container}>
+            <Route />
+          </View>
+        </PaperProvider>
       </ClerkProvider>
     </Provider>
   );
