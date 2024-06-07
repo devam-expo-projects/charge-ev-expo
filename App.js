@@ -33,7 +33,7 @@ export default function App() {
       <ClerkProvider publishableKey={EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
         <PaperProvider>
           <View style={styles.container}>
-            <Route />
+            {/* <Route /> */}
           </View>
         </PaperProvider>
       </ClerkProvider>
@@ -46,5 +46,6 @@ AppRegistry.registerComponent(appName, () => App);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'red'
   },
 });
