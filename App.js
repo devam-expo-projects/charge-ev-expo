@@ -35,15 +35,15 @@ function App() {
   };
 
   return (
-    <Provider store={store}>
-      <ClerkProvider publishableKey={EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
+    <ClerkProvider publishableKey={EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
+      <Provider store={store}>
         <PaperProvider>
           <View style={styles.container}>
             <Route />
           </View>
         </PaperProvider>
-      </ClerkProvider>
-    </Provider>
+      </Provider>
+    </ClerkProvider>
   );
 }
 
