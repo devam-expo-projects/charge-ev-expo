@@ -18,6 +18,7 @@ const HomeScreen = () => {
 
   const [assets, error] = useAssets([
     require("../../../assets/images/uber.png"),
+    require("../../../assets/images/ev-point.png"),
   ]);
 
   useEffect(() => {
@@ -135,7 +136,14 @@ const HomeScreen = () => {
                 onPress={() => setSelectedMarker(index)}
                 index={index}
                 key={index}
-              />
+              >
+                {!!assets?.[1] && (
+                  <Image
+                    source={assets[1]}
+                    style={{ width: 50, height: 40, resizeMode: "contain" }}
+                  />
+                )}
+              </Marker>
             ))}
           </MapView>
           <View style={styles.placeList}>
