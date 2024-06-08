@@ -54,8 +54,8 @@ const HomeScreen = () => {
 
   const getlocation = (search) => {
     setLocation({
-      latitude: search?.lat || 0,
-      longitude: search?.lng || 0,
+      latitude: search?.lat || 37.785834,
+      longitude: search?.lng || -122.406417,
     });
     setSelectedMarker(0);
   };
@@ -93,8 +93,8 @@ const HomeScreen = () => {
 
   const mapRegion = useMemo(
     () => ({
-      latitude: location?.latitude || 0,
-      longitude: location?.longitude || 0,
+      latitude: location?.latitude || 37.785834,
+      longitude: location?.longitude || -122.406417,
       longitudeDelta: 0.0422,
       latitudeDelta: 0.0422,
     }),
