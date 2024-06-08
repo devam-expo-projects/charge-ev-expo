@@ -44,7 +44,7 @@ const MapHeader = ({ setLocation }) => {
   };
 
   const imageURL = useMemo(() => {
-    return user?.imageUrl || "https://via.placeholder.com/40";
+    return user?.imageUrl;
   }, [user]);
 
   return (
@@ -63,7 +63,7 @@ const MapHeader = ({ setLocation }) => {
           />
         </View>
 
-        {imageURL && (
+        {/* {imageURL && (
           <Menu
             visible={visible}
             onDismiss={closeMenu}
@@ -76,7 +76,7 @@ const MapHeader = ({ setLocation }) => {
           >
             <Menu.Item onPress={handleSignOut} title="Logout" />
           </Menu>
-        )}
+        )} */}
       </View>
     </SafeAreaView>
   );
