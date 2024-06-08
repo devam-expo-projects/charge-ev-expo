@@ -42,8 +42,10 @@ const PlaceItem = ({ place, toggleFav, isFav, loading }) => {
       ? {
           uri: `${PHOTO_BASE_URL}${place.photos[0].name}/media?key=${EXPO_GOOGLE_API_KEY}&maxHeightPx=800&maxWidthPx=1200`,
         }
-      : assets?.[0];
-  }, [place, EXPO_GOOGLE_API_KEY, assets?.[0]]);
+      : assets?.[0]
+      ? assets[0]
+      : null;
+  }, [place, EXPO_GOOGLE_API_KEY, assets]);
 
   return (
     <View style={styles.renderItemContainer}>
@@ -54,15 +56,13 @@ const PlaceItem = ({ place, toggleFav, isFav, loading }) => {
         >
           {loading ? (
             <ActivityIndicator />
-          ) : !!isFav ? (
-            <AntDesign name="hearto" size={24} color="black" />
-          ) : (
+          ) : !isFav ? (
             <AntDesign name="heart" size={24} color="red" />
+          ) : (
+            <AntDesign name="hearto" size={24} color="black" />
           )}
         </TouchableOpacity>
-        {(!!assets?.[0] || place?.photos) && (
-          <Image source={imageURI} style={styles.image} />
-        )}
+        {imageURI && <Image source={imageURI} style={styles.image} />}
       </View>
       <View style={styles.infoContainer}>
         <Text style={styles.displayName} numberOfLines={1}>
@@ -119,7 +119,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   displayName: {
-    // fontFamily: "outfit-bold",
     fontSize: 20,
   },
   detailsContainer: {
@@ -129,14 +128,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   address: {
-    // fontFamily: "outfit",
     fontSize: 15,
   },
   connectors: {
-    // fontFamily: "outfit",
     fontSize: 15,
   },
   connectorCount: {
-    // fontFamily: "outfit-semibold",
+    fontWeight: "bold",
   },
 });

@@ -44,7 +44,7 @@ const MapHeader = ({ setLocation }) => {
   };
 
   const imageURL = useMemo(() => {
-    return user ? user?.imageUrl : "https://via.placeholder.com/40";
+    return user?.imageUrl || "https://via.placeholder.com/40";
   }, [user]);
 
   return (
