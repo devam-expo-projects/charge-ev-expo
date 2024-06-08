@@ -51,7 +51,10 @@ const PlaceList = ({ placeList }) => {
       }
     } catch (error) {
       console.error("Error fetching favorite places: ", error);
-      Alert.alert("Error", "An error occurred while fetching favorite places.");
+      Alert.alert(
+        "Error",
+        "An error occurred while fetching favorite places. Please try again later."
+      );
     }
   };
 
@@ -76,10 +79,12 @@ const PlaceList = ({ placeList }) => {
   };
 
   const scrollToIndex = (index) => {
-    try {
-      flatListRef.current?.scrollToIndex({ animated: true, index });
-    } catch (error) {
-      console.error("Error scrolling to index: ", error);
+    if (index >= 0 && index < placeList.length) {
+      try {
+        flatListRef.current?.scrollToIndex({ animated: true, index });
+      } catch (error) {
+        console.error("Error scrolling to index: ", error);
+      }
     }
   };
 
