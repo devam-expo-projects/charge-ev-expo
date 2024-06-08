@@ -6,7 +6,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  ToastAndroid,
+  Alert,
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -29,30 +29,45 @@ import Header from "../../Components/Header";
 const FavoriteScreen = () => {
   const db = getFirestore(app);
   const { user } = useUser();
-  const userEmail = user?.primaryEmailAddress.emailAddress;
+  const userEmail = user?.primaryEmailAddress?.emailAddress;
   const [favList, setFavList] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const getFav = async () => {
-    const querySnapshot = await getDocs(
-      query(collection(db, "charge-ev"), where("email", "==", userEmail))
-    );
-    const favs = [];
-    querySnapshot.forEach((doc) => {
-      favs.push(doc.data());
-    });
-    setFavList([...favs]);
+    try {
+      if (userEmail) {
+        const querySnapshot = await getDocs(
+          query(collection(db, "charge-ev"), where("email", "==", userEmail))
+        );
+        const favs = [];
+        querySnapshot.forEach((doc) => {
+          favs.push(doc.data());
+        });
+        setFavList(favs);
+      } else {
+        Alert.alert("User not found");
+      }
+    } catch (error) {
+      console.error("Error fetching favorite places: ", error);
+      Alert.alert("Error", "An error occurred while fetching favorite places.");
+    }
   };
 
   useEffect(() => {
-    setLoading(true);
-    user && getFav();
-    setLoading(false);
+    const fetchFavorites = async () => {
+      setLoading(true);
+      if (user) {
+        await getFav();
+      }
+      setLoading(false);
+    };
+
+    fetchFavorites();
   }, [user]);
 
   const toggleFav = async (place, toAdd) => {
-    setLoading(true);
     try {
+      setLoading(true);
       if (toAdd) {
         await setDoc(doc(db, "charge-ev", place?.id?.toString()), {
           place: place,
@@ -62,18 +77,23 @@ const FavoriteScreen = () => {
         await deleteDoc(doc(db, "charge-ev", place?.id?.toString()));
       }
       await getFav();
-      setLoading(false);
-    } catch (err) {
-      console.error("Error adding document: ", err);
+    } catch (error) {
+      console.error("Error toggling favorite: ", error);
+      Alert.alert("Error", "An error occurred while updating favorites.");
+    } finally {
       setLoading(false);
     }
   };
 
   useFocusEffect(
     React.useCallback(() => {
-      setLoading(true);
-      getFav();
-      setLoading(false);
+      const refreshFavorites = async () => {
+        setLoading(true);
+        await getFav();
+        setLoading(false);
+      };
+
+      refreshFavorites();
     }, [])
   );
 
@@ -97,12 +117,12 @@ const FavoriteScreen = () => {
               <PlaceItem
                 isFav={false}
                 place={item?.place}
-                key={index}
+                key={index.toString()}
                 toggleFav={toggleFav}
                 loading={loading}
               />
             )}
-          ></FlatList>
+          />
         ) : (
           <Text style={styles.emptyMessage}>Favorite List Empty</Text>
         )}
@@ -126,5 +146,8 @@ const styles = StyleSheet.create({
   },
   emptyMessage: {
     // fontFamily: "outfit",
+    fontSize: 18,
+    textAlign: "center",
+    marginTop: 20,
   },
 });

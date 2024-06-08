@@ -1,10 +1,10 @@
 import {
   Dimensions,
   FlatList,
-  Platform,
   StyleSheet,
-  ToastAndroid,
   View,
+  Alert,
+  ActivityIndicator,
 } from "react-native";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { MarkerSelection } from "../Context/MarkerSelection";
@@ -29,21 +29,30 @@ const PlaceList = ({ placeList }) => {
   const flatListRef = useRef();
   const db = getFirestore(app);
   const { user } = useUser();
-  const userEmail = user?.primaryEmailAddress.emailAddress;
+  const userEmail = user?.primaryEmailAddress?.emailAddress;
 
   const { selectedMarker, setSelectedMarker } = useContext(MarkerSelection);
   const [favList, setFavList] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const getFav = async () => {
-    const querySnapshot = await getDocs(
-      query(collection(db, "charge-ev"), where("email", "==", userEmail))
-    );
-    const favs = [];
-    querySnapshot.forEach((doc) => {
-      favs.push(doc.data());
-    });
-    setFavList(favs);
+    try {
+      if (userEmail) {
+        const querySnapshot = await getDocs(
+          query(collection(db, "charge-ev"), where("email", "==", userEmail))
+        );
+        const favs = [];
+        querySnapshot.forEach((doc) => {
+          favs.push(doc.data());
+        });
+        setFavList(favs);
+      } else {
+        Alert.alert("User not found");
+      }
+    } catch (error) {
+      console.error("Error fetching favorite places: ", error);
+      Alert.alert("Error", "An error occurred while fetching favorite places.");
+    }
   };
 
   const toggleFav = async (place, toAdd) => {
@@ -57,24 +66,33 @@ const PlaceList = ({ placeList }) => {
       } else {
         await deleteDoc(doc(db, "charge-ev", place?.id));
       }
-
       await getFav();
+    } catch (error) {
+      console.error("Error toggling favorite: ", error);
+      Alert.alert("Error", "An error occurred while updating favorites.");
+    } finally {
       setLoading(false);
-    } catch (err) {
-      console.error("Error adding document: ", err);
     }
   };
 
   const scrollToIndex = (index) => {
-    flatListRef.current?.scrollToIndex({ animated: true, index });
+    try {
+      flatListRef.current?.scrollToIndex({ animated: true, index });
+    } catch (error) {
+      console.error("Error scrolling to index: ", error);
+    }
   };
 
   useEffect(() => {
-    selectedMarker && scrollToIndex(selectedMarker);
+    if (selectedMarker !== null) {
+      scrollToIndex(selectedMarker);
+    }
   }, [selectedMarker]);
 
   useEffect(() => {
-    user && getFav();
+    if (user) {
+      getFav();
+    }
   }, [user]);
 
   const isFav = (placeId) => {
@@ -93,13 +111,13 @@ const PlaceList = ({ placeList }) => {
       <FlatList
         data={placeList}
         ref={flatListRef}
-        horizontal={true}
+        horizontal
         renderItem={({ item, index }) => {
           const isFavrite = isFav(item?.id);
           return (
             <PlaceItem
               place={item}
-              key={index}
+              key={index.toString()}
               toggleFav={toggleFav}
               isFav={isFavrite}
               loading={loading}

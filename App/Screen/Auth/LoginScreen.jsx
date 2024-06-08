@@ -38,10 +38,15 @@ const LoginScreen = () => {
     }
   };
 
+  if (error) {
+    console.error("Error loading assets", error);
+    return null;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageContainer}>
-        {!!assets?.[0] && (
+        {assets && assets[0] && (
           <Image
             source={assets[0]}
             style={styles.carImage}
