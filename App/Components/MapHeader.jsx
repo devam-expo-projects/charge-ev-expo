@@ -6,7 +6,7 @@ import {
   Pressable,
   Alert,
 } from "react-native";
-import React from "react";
+import React, { useMemo } from "react";
 import { useAuth, useUser } from "@clerk/clerk-expo";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { EXPO_PUBLIC_PLACE_API_KEY } from "@env";
@@ -43,6 +43,10 @@ const MapHeader = ({ setLocation }) => {
     }
   };
 
+  const imageURL = useMemo(() => {
+    return user ? user?.imageUrl : "https://via.placeholder.com/40";
+  }, [user]);
+
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -59,23 +63,20 @@ const MapHeader = ({ setLocation }) => {
           />
         </View>
 
-        <Menu
-          visible={visible}
-          onDismiss={closeMenu}
-          anchor={
-            <Pressable onPress={openMenu}>
-              <Image
-                source={{
-                  uri: user?.imageUrl || "https://via.placeholder.com/40",
-                }}
-                style={styles.userImage}
-              />
-            </Pressable>
-          }
-          anchorPosition="bottom"
-        >
-          <Menu.Item onPress={handleSignOut} title="Logout" />
-        </Menu>
+        {imageURL && (
+          <Menu
+            visible={visible}
+            onDismiss={closeMenu}
+            anchor={
+              <Pressable onPress={openMenu}>
+                <Image source={{ uri: imageURL }} style={styles.userImage} />
+              </Pressable>
+            }
+            anchorPosition="bottom"
+          >
+            <Menu.Item onPress={handleSignOut} title="Logout" />
+          </Menu>
+        )}
       </View>
     </SafeAreaView>
   );

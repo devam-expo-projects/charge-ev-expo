@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useMemo } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { EXPO_GOOGLE_API_KEY } from "@env";
@@ -37,6 +37,14 @@ const PlaceItem = ({ place, toggleFav, isFav, loading }) => {
 
   const connectorCount = parseInt(place.evChargeOptions?.connectorCount) || 0;
 
+  const imageURI = useMemo(() => {
+    return place?.photos?.[0]?.name
+      ? {
+          uri: `${PHOTO_BASE_URL}${place.photos[0].name}/media?key=${EXPO_GOOGLE_API_KEY}&maxHeightPx=800&maxWidthPx=1200`,
+        }
+      : assets?.[0];
+  }, [place, EXPO_GOOGLE_API_KEY, assets?.[0]]);
+
   return (
     <View style={styles.renderItemContainer}>
       <View style={styles.imageContainer}>
@@ -53,16 +61,7 @@ const PlaceItem = ({ place, toggleFav, isFav, loading }) => {
           )}
         </TouchableOpacity>
         {(!!assets?.[0] || place?.photos) && (
-          <Image
-            source={
-              place?.photos && place.photos[0]?.name
-                ? {
-                    uri: `${PHOTO_BASE_URL}${place.photos[0].name}/media?key=${EXPO_GOOGLE_API_KEY}&maxHeightPx=800&maxWidthPx=1200`,
-                  }
-                : assets?.[0]
-            }
-            style={styles.image}
-          />
+          <Image source={imageURI} style={styles.image} />
         )}
       </View>
       <View style={styles.infoContainer}>
