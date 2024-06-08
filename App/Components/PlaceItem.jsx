@@ -12,12 +12,12 @@ import {
 import React, { useMemo } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import { EXPO_GOOGLE_API_KEY } from "@env";
+// import { EXPO_GOOGLE_API_KEY } from "@env";
 import { useAssets } from "expo-asset";
-
 const screenWidth = Dimensions.get("screen").width;
 
 const PlaceItem = ({ place, toggleFav, isFav, loading }) => {
+  const EXPO_GOOGLE_API_KEY = "AIzaSyBKnfAl9mGbPIPlbSoqpTOJYAdWJtOqdas";
   const PHOTO_BASE_URL = "https://places.googleapis.com/v1/";
 
   const [assets, error] = useAssets([
@@ -45,7 +45,7 @@ const PlaceItem = ({ place, toggleFav, isFav, loading }) => {
       : assets?.[0]
       ? assets[0]
       : null;
-  }, [place, EXPO_GOOGLE_API_KEY, assets]);
+  }, [place, assets]);
 
   return (
     <View style={styles.renderItemContainer}>

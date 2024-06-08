@@ -4,12 +4,15 @@ import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
 import { ClerkProvider } from '@clerk/clerk-expo';
 import * as SecureStore from "expo-secure-store";
-import { EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY, DSN } from "@env";
+// import { EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY, DSN } from "@env";
 import { PaperProvider } from 'react-native-paper';
 import Route from './App/Screen/Route';
 import store from './App/Store/store';
 import { name as appName } from './app.json';
 import * as Sentry from "@sentry/react-native";
+
+const DSN = 'https://69c77fca93d0d28e280e019a8aa6698e@o4507389493444608.ingest.us.sentry.io/4507389522345984'
+const EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY = 'pk_test_Z29yZ2VvdXMtYmFzcy0zMS5jbGVyay5hY2NvdW50cy5kZXYk'
 
 Sentry.init({
   dsn: DSN,
