@@ -108,7 +108,7 @@ const HomeScreen = () => {
         <StatusBar hidden={true} />
         <View style={{ flex: 1 }}>
           <View style={styles.headerContainer}>
-            {/* <MapHeader setLocation={getlocation} /> */}
+            <MapHeader setLocation={getlocation} />
           </View>
           <MapView style={styles.map} region={mapRegion}>
             {location && (

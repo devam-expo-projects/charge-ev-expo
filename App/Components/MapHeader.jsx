@@ -9,7 +9,6 @@ import {
 import React, { useMemo } from "react";
 import { useAuth, useUser } from "@clerk/clerk-expo";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { EXPO_PUBLIC_PLACE_API_KEY } from "@env";
 import { Menu } from "react-native-paper";
 
 const MapHeader = ({ setLocation }) => {

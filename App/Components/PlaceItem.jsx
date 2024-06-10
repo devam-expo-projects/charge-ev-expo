@@ -12,7 +12,6 @@ import {
 import React, { useMemo } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-// import { EXPO_GOOGLE_API_KEY } from "@env";
 import { useAssets } from "expo-asset";
 const screenWidth = Dimensions.get("screen").width;
 

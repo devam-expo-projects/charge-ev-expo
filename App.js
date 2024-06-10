@@ -4,7 +4,6 @@ import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
 import { ClerkProvider } from '@clerk/clerk-expo';
 import * as SecureStore from "expo-secure-store";
-// import { EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY, DSN } from "@env";
 import { PaperProvider } from 'react-native-paper';
 import Route from './App/Screen/Route';
 import store from './App/Store/store';
