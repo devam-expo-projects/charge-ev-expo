@@ -10,9 +10,10 @@ import React, { useMemo } from "react";
 import { useAuth, useUser } from "@clerk/clerk-expo";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { Menu } from "react-native-paper";
+import { EXPO_PUBLIC_PLACE_API_KEY } from "@env";
 
 const MapHeader = ({ setLocation }) => {
-  const EXPO_PUBLIC_PLACE_API_KEY = "AIzaSyD0sFUVcMlmAhRclQP27iSdhawWilZVNfI";
+  // const EXPO_PUBLIC_PLACE_API_KEY = "AIzaSyD0sFUVcMlmAhRclQP27iSdhawWilZVNfI";
   const { user } = useUser() || {};
   const [visible, setVisible] = React.useState(false);
   const openMenu = () => setVisible(true);

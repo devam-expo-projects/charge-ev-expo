@@ -14,9 +14,10 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { useAssets } from "expo-asset";
 const screenWidth = Dimensions.get("screen").width;
+import { EXPO_GOOGLE_API_KEY } from "@env";
 
 const PlaceItem = ({ place, toggleFav, isFav, loading }) => {
-  const EXPO_GOOGLE_API_KEY = "AIzaSyBK3N8jLF0URASWuHcrQQtAnIJsmU3Kl-I";
+  // const EXPO_GOOGLE_API_KEY = "AIzaSyBK3N8jLF0URASWuHcrQQtAnIJsmU3Kl-I";
   const PHOTO_BASE_URL = "https://places.googleapis.com/v1/";
 
   const [assets, error] = useAssets([

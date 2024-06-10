@@ -9,12 +9,13 @@ import Route from './App/Screen/Route';
 import store from './App/Store/store';
 import { name as appName } from './app.json';
 import * as Sentry from "@sentry/react-native";
+import { EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY, SENTRY_DSN } from '@env';
 
-const DSN = 'https://69c77fca93d0d28e280e019a8aa6698e@o4507389493444608.ingest.us.sentry.io/4507389522345984'
-const EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY = 'pk_test_Z29yZ2VvdXMtYmFzcy0zMS5jbGVyay5hY2NvdW50cy5kZXYk'
+// const SENTRY_DSN = 'https://69c77fca93d0d28e280e019a8aa6698e@o4507389493444608.ingest.us.sentry.io/4507389522345984'
+// const EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY = 'pk_test_Z29yZ2VvdXMtYmFzcy0zMS5jbGVyay5hY2NvdW50cy5kZXYk'
 
 Sentry.init({
-  dsn: DSN,
+  dsn: SENTRY_DSN,
   tracesSampleRate: 1.0,
 });
 
