@@ -53,6 +53,7 @@ const MapHeader = ({ setLocation }) => {
           <GooglePlacesAutocomplete
             placeholder="Search EV charging station"
             enablePoweredByContainer={false}
+            provider={PROVIDER_GOOGLE}
             fetchDetails={true}
             onPress={handlePlaceSelect}
             query={{
