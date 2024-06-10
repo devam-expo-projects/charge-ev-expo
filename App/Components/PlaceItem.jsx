@@ -62,9 +62,9 @@ const PlaceItem = ({ place, toggleFav, isFav, loading }) => {
             <AntDesign name="hearto" size={24} color="black" />
           )}
         </TouchableOpacity>
-        {(imageURI || imageURI?.uri) && (
+        {/* {(imageURI || imageURI?.uri) && (
           <Image source={imageURI} style={styles.image} />
-        )}
+        )} */}
       </View>
       <View style={styles.infoContainer}>
         <Text style={styles.displayName} numberOfLines={1}>

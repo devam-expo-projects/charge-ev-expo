@@ -13,7 +13,7 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import { Menu } from "react-native-paper";
 
 const MapHeader = ({ setLocation }) => {
-  const EXPO_PUBLIC_PLACE_API_KEY = "AIzaSyB0AyCEw2bMHXtw9zKsuibyXsUp2Urvcy8";
+  const EXPO_PUBLIC_PLACE_API_KEY = "AIzaSyBk0mE3DH8MdlzRp2PfnKIM-ubi9Hynyw8";
   const { user } = useUser() || {};
   const [visible, setVisible] = React.useState(false);
   const openMenu = () => setVisible(true);
@@ -63,7 +63,7 @@ const MapHeader = ({ setLocation }) => {
           />
         </View>
 
-        {imageURL && (
+        {/* {imageURL && (
           <Menu
             visible={visible}
             onDismiss={closeMenu}
@@ -76,7 +76,7 @@ const MapHeader = ({ setLocation }) => {
           >
             <Menu.Item onPress={handleSignOut} title="Logout" />
           </Menu>
-        )}
+        )} */}
       </View>
     </SafeAreaView>
   );
@@ -96,6 +96,6 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     flex: 1,
-    marginRight: 10,
+    rowGap: 10,
   },
 });
