@@ -1,7 +1,7 @@
 import axios from 'axios';
 // import { EXPO_GOOGLE_API_KEY } from "@env";
 const BASE_URL = "https://places.googleapis.com/v1/places:searchNearby";
-const EXPO_GOOGLE_API_KEY = 'AIzaSyBKnfAl9mGbPIPlbSoqpTOJYAdWJtOqdas'
+const EXPO_GOOGLE_API_KEY = 'AIzaSyB0AyCEw2bMHXtw9zKsuibyXsUp2Urvcy8'
 
 const headers = {
   'Content-Type': 'application/json',

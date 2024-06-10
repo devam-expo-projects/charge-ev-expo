@@ -17,7 +17,7 @@ import { useAssets } from "expo-asset";
 const screenWidth = Dimensions.get("screen").width;
 
 const PlaceItem = ({ place, toggleFav, isFav, loading }) => {
-  const EXPO_GOOGLE_API_KEY = "AIzaSyBKnfAl9mGbPIPlbSoqpTOJYAdWJtOqdas";
+  const EXPO_GOOGLE_API_KEY = "AIzaSyB0AyCEw2bMHXtw9zKsuibyXsUp2Urvcy8";
   const PHOTO_BASE_URL = "https://places.googleapis.com/v1/";
 
   const [assets, error] = useAssets([
@@ -62,9 +62,9 @@ const PlaceItem = ({ place, toggleFav, isFav, loading }) => {
             <AntDesign name="hearto" size={24} color="black" />
           )}
         </TouchableOpacity>
-        {/* {(imageURI || imageURI?.uri) && (
+        {(imageURI || imageURI?.uri) && (
           <Image source={imageURI} style={styles.image} />
-        )} */}
+        )}
       </View>
       <View style={styles.infoContainer}>
         <Text style={styles.displayName} numberOfLines={1}>
