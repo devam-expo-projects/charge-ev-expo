@@ -10,7 +10,7 @@ module.exports = {
     },
     extra: {
         clerkPublishableKey: process.env.CLERK_PUBLISHABLE_KEY,
-        googleApiKey: "AIzaSyBKnfAl9mGbPIPlbSoqpTOJYAdWJtOqdas",
+        googleApiKey: "AIzaSyBK3N8jLF0URASWuHcrQQtAnIJsmU3Kl-I",
         eas: {
             projectId: "36b13449-c9c6-417e-b560-c3295b38c2e2",
         },

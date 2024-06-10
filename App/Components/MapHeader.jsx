@@ -50,17 +50,17 @@ const MapHeader = ({ setLocation }) => {
     <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.searchContainer}>
-          <GooglePlacesAutocomplete
+          {/* <GooglePlacesAutocomplete
             placeholder="Search EV charging station"
             enablePoweredByContainer={false}
-            provider={PROVIDER_GOOGLE}
+            // provider={PROVIDER_GOOGLE}
             fetchDetails={true}
             onPress={handlePlaceSelect}
             query={{
               key: EXPO_PUBLIC_PLACE_API_KEY,
               language: "en",
             }}
-          />
+          /> */}
         </View>
 
         {imageURL && (
