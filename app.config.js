@@ -4,6 +4,11 @@ module.exports = {
     version: '1.0.0',
     android: {
         package: "com.project.chargeev",
+        config: {
+            googleMaps: {
+                apiKey: "AIzaSyBK3N8jLF0URASWuHcrQQtAnIJsmU3Kl-I",
+            }
+        }
     },
     ios: {
         bundleIdentifier: "com.project.chargeev",
