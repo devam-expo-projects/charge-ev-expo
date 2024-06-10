@@ -9,11 +9,11 @@ import {
 import React, { useMemo } from "react";
 import { useAuth, useUser } from "@clerk/clerk-expo";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-// import { EXPO_PUBLIC_PLACE_API_KEY } from "@env";
+import { EXPO_PUBLIC_PLACE_API_KEY } from "@env";
 import { Menu } from "react-native-paper";
 
 const MapHeader = ({ setLocation }) => {
-  const EXPO_PUBLIC_PLACE_API_KEY = "AIzaSyBk0mE3DH8MdlzRp2PfnKIM-ubi9Hynyw8";
+  const EXPO_PUBLIC_PLACE_API_KEY = "AIzaSyD0sFUVcMlmAhRclQP27iSdhawWilZVNfI";
   const { user } = useUser() || {};
   const [visible, setVisible] = React.useState(false);
   const openMenu = () => setVisible(true);
@@ -63,7 +63,7 @@ const MapHeader = ({ setLocation }) => {
           />
         </View>
 
-        {/* {imageURL && (
+        {imageURL && (
           <Menu
             visible={visible}
             onDismiss={closeMenu}
@@ -76,7 +76,7 @@ const MapHeader = ({ setLocation }) => {
           >
             <Menu.Item onPress={handleSignOut} title="Logout" />
           </Menu>
-        )} */}
+        )}
       </View>
     </SafeAreaView>
   );
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "flex-start",
+    columnGap: 10,
   },
   userImage: {
     width: 40,
@@ -96,6 +97,5 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     flex: 1,
-    rowGap: 10,
   },
 });
