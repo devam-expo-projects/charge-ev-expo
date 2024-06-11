@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     gap: 8,
     marginBottom: 10,
+    marginHorizontal: 10,
   },
   buttonText: {
     fontWeight: FontWeight.MEDIUM,

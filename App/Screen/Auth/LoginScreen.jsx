@@ -53,8 +53,8 @@ const LoginScreen = () => {
             resizeMode="contain"
           />
         )}
+        <GoogleSign title="Login With Google" onClick={handleGoogleSignIn} />
       </View>
-      <GoogleSign title="Login With Google" onClick={handleGoogleSignIn} />
     </SafeAreaView>
   );
 };
@@ -68,11 +68,12 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     justifyContent: "center",
-    alignItems: "center",
-    paddingTop: height * 0.1,
+    height: "90%",
+    maeginBottim: 40,
+    // borderWidth: 1,
   },
   carImage: {
     width: "100%",
-    height: height * 0.4,
+    height: height / 5,
   },
 });
