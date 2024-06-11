@@ -5,11 +5,13 @@
     "scheme": "charge-ev",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/car-logo.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/icon.png",
-      "resizeMode": "cover"
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff",
+      "loadingIndicatorStyleExperimental": "large"
     },
     "ios": {
       "supportsTablet": true,
