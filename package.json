@@ -8,6 +8,7 @@
     "start:ios": "expo start --ios",
     "android:preview-build": "eas build --profile preview --platform android",
     "ios:preview-build": "eas build --profile preview --platform ios",
+    "android:production-build": "eas build --profile production --platform android",
     "web": "expo start --web"
   },
   "dependencies": {
