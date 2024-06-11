@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "expo/AppEntry.js",
   "scripts": {
-    "start": "expo start -c",
+    "start": "expo start --clear",
     "start:android": "expo start --android",
     "start:ios": "expo start --ios",
     "android:preview-build": "eas build --profile preview --platform android",
