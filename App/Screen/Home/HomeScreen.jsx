@@ -118,12 +118,12 @@ const HomeScreen = () => {
                   longitude: location?.longitude,
                 }}
               >
-                {!!assets?.[0] && (
+                {/* {!!assets?.[0] && (
                   <Image
                     source={assets[0]}
                     style={{ width: 60, height: 60, resizeMode: "contain" }}
                   />
-                )}
+                )} */}
               </Marker>
             )}
 
