@@ -10,7 +10,9 @@
     "ios:preview-build": "eas build --profile preview --platform ios",
     "android:production-build": "eas build --profile production --platform android",
     "ios:production-build": "eas build --profile production --platform ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
   },
   "dependencies": {
     "@clerk/clerk-expo": "^1.1.7",
